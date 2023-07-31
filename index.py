@@ -52,7 +52,24 @@ app.layout = html.Div(
 
 def render_graphs(cities, mainVariable):
     
-    return
+    # cities= ['Yangon', 'Mandelay']
+    # mainVariable = 'gross income'
+    
+    operation = np.sum if mainVariable == 'gross income' else np.mean
+    df_filtered = df_data[df_data['City'].isin(cities)]
+    df_city = df_filtered.groupby('City')[mainVariable].apply(operation).to_frame().reset_index()
+    df_payment = df_filtered.groupby('Payment')[mainVariable].apply(operation).to_frame().reset_index()
+    df_product_Income = df_filtered.groupby(['Product line','City'])[mainVariable].apply(operation).to_frame().reset_index()
+    
+    figCity = px.bar(df_city, x='City', y=mainVariable)
+    figPayment = px.bar(df_payment, y='Payment', x=mainVariable, orientation='h')
+    figProductIncome = px.bar(df_product_Income, x=mainVariable, y='Product line', color='City', orientation='h', barmode='group')
+    
+    figCity.update_layout(margin=dict(l=0, r=0, t=20, b=20), height=200)
+    figPayment.update_layout(margin=dict(l=0, r=0, t=20, b=20), height=200)
+    figProductIncome.update_layout(margin=dict(l=0, r=0, t=20, b=20), height=400)
+    
+    return figCity, figPayment, figProductIncome
 
 
 
