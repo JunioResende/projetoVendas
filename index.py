@@ -11,18 +11,22 @@ import plotly.graph_objects as go
 app = dash.Dash(__name__)
 server = app.server
 
-
-# =========Layout===========
-app.layout = html.Div(
-    children=[]
-)
-
-# =========Callbacks========
+# ========Tratamento de Dados =============
+df_data = pd.read_csv('supermarket_sales.csv')
+df_data['Date'] = pd.to_datetime(df_data['Date'])
 
 
+# # =========Layout===========
+# app.layout = html.Div(
+#     children=[]
+# )
+
+# # =========Callbacks========
 
 
 
-#=========Run Server=========
-if __name__ == '__main__':
-    app.run_server(port=8050, debug=True)
+
+
+# #=========Run Server=========
+# if __name__ == '__main__':
+#     app.run_server(port=8050, debug=True)
