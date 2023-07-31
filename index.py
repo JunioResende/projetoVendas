@@ -40,6 +40,19 @@ app.layout = html.Div(
 
 # =========Callbacks========
 
+@app.callback([
+    Output('cityFig', 'figure'),
+    Output('payFig', 'figure'),
+    Output('incomePerProductFig', 'figure'),
+], 
+    [
+        Input('checkCity', 'value'),
+        Input('mainVariable', 'value')
+        ])
+
+def render_graphs(cities, mainVariable):
+    
+    return
 
 
 
